@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="{{ locale }}" dir="{{ direction }}" class="{{ checkout_html_classes }}">
+  <head>
+  {% render 'elevar-head-listener' %}
+{%- unless request.path contains 'thank_you' -%}
+  {% render 'elevar-head' %}
+{%- endunless -%}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
+    <meta name="referrer" content="origin">
+
+<!-- begin Convert Experiences code-->
+<script type="text/javascript">
+ var _conv_page_type = "{{ request.page_type }}";
+ var _conv_category_id = "{{ collection.id }}";
+ var _conv_category_name = "{{ collection.title }}";
+ var _conv_product_sku = "{{ product.selected_variant.sku }}";
+ var _conv_product_name = "{{ product.title }}";
+ var _conv_product_price = "{{ product.price_min | money_without_currency }}";
+ var _conv_customer_id = "{{ customer.id }}";
+ var _conv_custom_v1 = "{{ product.tags.first }}";
+ var _conv_custom_v2 = "{{ collection.current_type }}";
+ var _conv_custom_v3 = "{{ cart.item_count }}";
+ var _conv_custom_v4 = "{{ cart.total_price | money_without_currency }}";
+</script>
+<script type="text/javascript" src="//cdn-4.convertexperiments.com/js/10041175-10041321.js"></script>
+<!-- end Convert Experiences code -->
+    
+    <title>{{ page_title }}</title>
+
+    {{ content_for_header }}
+
+    {{ checkout_stylesheets }}
+    {{ checkout_scripts }}
+   
+  </head>
+  <body>
+{%- unless request.path contains 'thank_you' -%}
+  {% render 'elevar-checkout-end' %}
+{%- endunless -%}
+    {{ skip_to_content_link }}
+
+    <header class="banner" data-header role="banner">
+      <div class="wrap">
+        {{ content_for_logo }}
+      </div>
+    </header>
+
+    {{ order_summary_toggle }}
+    <div class="content" data-content>
+      <div class="wrap">
+        <div class="main">
+          <header class="main__header" role="banner">
+            {{ content_for_logo }}
+        {% if settings.breadcrumb == false %}
+              {{ breadcrumb }}
+            {% elsif settings.breadcrumb == true %}
+              {% if content_for_layout contains 'data-step="contact_information"' %}
+                <ul class="bc">
+                  <li class="bc_item bc_complete">
+                    <img src="{{ settings.breadcrumb_img | img_url: 'master' }}" class="bread-crumb-img">
+                    <img src="{{ settings.breadcrumb_img_active | img_url: 'master' }}" class="bread-crumb-img-active">
+                    Cart
+                  </li>
+                  <li class="bc_item bc_current">
+                    <img src="{{ settings.breadcrumb_img | img_url: 'master' }}" class="bread-crumb-img">
+                    <img src="{{ settings.breadcrumb_img_active | img_url: 'master' }}" class="bread-crumb-img-active">
+                    Information
+                  </li>
+                  <li class="bc_item">
+                    <img src="{{ settings.breadcrumb_img | img_url: 'master' }}" class="bread-crumb-img">
+                    <img src="{{ settings.breadcrumb_img_active | img_url: 'master' }}" class="bread-crumb-img-active">
+                    Shipping
+                  </li>
+                  <li class="bc_item">
+                    <img src="{{ settings.breadcrumb_img | img_url: 'master' }}" class="bread-crumb-img">
+                    <img src="{{ settings.breadcrumb_img_active | img_url: 'master' }}" class="bread-crumb-img-active">
+                    Payment
+                  </li>
+                </ul>
+              {% elsif content_for_layout contains 'data-step="shipping_method"' %}
+                <ul class="bc bc2">
+                  <li class="bc_item bc_complete">
+                    <img src="{{ settings.breadcrumb_img | img_url: 'master' }}" class="bread-crumb-img">
+                    <img src="{{ settings.breadcrumb_img_active | img_url: 'master' }}" class="bread-crumb-img-active">
+                    Cart
+                  </li>
+                  <a href="/cart/checkout?step=contact_information" class="li-main">
+                    <li class="bc_item bc_complete">
+                      <img src="{{ settings.breadcrumb_img | img_url: 'master' }}" class="bread-crumb-img">
+                      <img
+                        src="{{ settings.breadcrumb_img_active | img_url: 'master' }}"
+                        class="bread-crumb-img-active"
+                      >
+                      Information
+                    </li>
+                  </a>
+                  <li class="bc_item bc_current">
+                    <img src="{{ settings.breadcrumb_img | img_url: 'master' }}" class="bread-crumb-img">
+                    <img src="{{ settings.breadcrumb_img_active | img_url: 'master' }}" class="bread-crumb-img-active">
+                    Shipping
+                  </li>
+                  <li class="bc_item">
+                    <img src="{{ settings.breadcrumb_img | img_url: 'master' }}" class="bread-crumb-img">
+                    <img src="{{ settings.breadcrumb_img_active | img_url: 'master' }}" class="bread-crumb-img-active">
+                    Payment
+                  </li>
+                </ul>
+              {% elsif content_for_layout contains 'data-step="payment_method"' %}
+                <ul class="bc bc3">
+                  <li class="bc_item bc_complete">
+                    <img src="{{ settings.breadcrumb_img | img_url: 'master' }}" class="bread-crumb-img">
+                    <img src="{{ settings.breadcrumb_img_active | img_url: 'master' }}" class="bread-crumb-img-active">
+                    Cart
+                  </li>
+                  <a href="/cart/checkout?step=contact_information" class="li-main">
+                    <li class="bc_item bc_complete">
+                      <img src="{{ settings.breadcrumb_img | img_url: 'master' }}" class="bread-crumb-img">
+                      <img
+                        src="{{ settings.breadcrumb_img_active | img_url: 'master' }}"
+                        class="bread-crumb-img-active"
+                      >
+                      Information
+                    </li>
+                  </a>
+                  <a href="/cart/checkout?step=shipping_method" class="li-main">
+                    <li class="bc_item bc_complete">
+                      <img src="{{ settings.breadcrumb_img | img_url: 'master' }}" class="bread-crumb-img">
+                      <img
+                        src="{{ settings.breadcrumb_img_active | img_url: 'master' }}"
+                        class="bread-crumb-img-active"
+                      >
+                      Shipping
+                    </li>
+                  </a>
+                  <li class="bc_item bc_current">
+                    <img src="{{ settings.breadcrumb_img | img_url: 'master' }}" class="bread-crumb-img">
+                    <img src="{{ settings.breadcrumb_img_active | img_url: 'master' }}" class="bread-crumb-img-active">
+                    Payment
+                  </li>
+                </ul>
+              {% endif %}
+            {% endif %}
+            {{ alternative_payment_methods }}
+            {% if settings.ch_timer == true  %}
+                  <div class="timer-checkout">
+                    <div class="timer-inner">
+                      {{ settings.ch_timer_before }} 
+                      <span id="ten-countdown"> {{ settings.timers }}</span>
+                       {{ settings.ch_timer_after }}
+                    </div>
+                  </div>
+                {% endif %}
+          </header>
+          <main class="main__content" role="main">
+            {{ content_for_layout }}
+          </main>
+          <footer class="main__footer" role="contentinfo">
+            {{ content_for_footer }}
+          </footer>
+        </div>
+        <aside class="sidebar" role="complementary">
+          <div class="sidebar__header">
+            {{ content_for_logo }}
+          </div>
+          <div class="sidebar__content">
+            {{ content_for_order_summary }}
+             {% include 'additional-checkout-info' %}
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    {{ tracking_code }}
+     {% if settings.benefits == true %}
+      <div>
+        <div class="CheckoutBenefits">
+          <div class="CheckoutBenefits__Header">
+            <span class="CheckoutBenefits__Heading">{{ settings.benefit_heading }}</span>
+          </div>
+          <div class="CheckoutBenefits__Wrapper">
+            {% if settings.benefit_title_1 != blank %}
+              <div class="Item" aria-hidden="false">
+                <div class="Item__Logo">
+                  <img src="{{ settings.benefit_image_1 | img_url:'original' }}">
+                </div>
+                <div class="Item__Content">
+                  <span class="Title">{{ settings.benefit_title_1 }}</span>
+                  <p class="Text">{{ settings.benefit_text_1 }}</p>
+                </div>
+              </div>
+            {% endif %}
+
+            {% if settings.benefit_title_2 != blank %}
+              <div class="Item" aria-hidden="false">
+                <div class="Item__Logo">
+                  <img src="{{ settings.benefit_image_2 | img_url:'original' }}">
+                </div>
+                <div class="Item__Content">
+                  <span class="Title">{{ settings.benefit_title_2 }}</span>
+                  <p class="Text">{{ settings.benefit_text_2 }}</p>
+                </div>
+              </div>
+            {% endif %}
+
+            {% if settings.benefit_title_3 != blank %}
+              <div class="Item" aria-hidden="false">
+                <div class="Item__Logo">
+                  <img src="{{ settings.benefit_image_3 | img_url:'original' }}">
+                </div>
+                <div class="Item__Content">
+                  <span class="Title">{{ settings.benefit_title_3 }}</span>
+                  <p class="Text">{{ settings.benefit_text_3 }}</p>
+                </div>
+              </div>
+            {% endif %}
+            {% if settings.benefit_title_4 != blank %}
+              <div class="Item" aria-hidden="false">
+                <div class="Item__Logo">
+                  <img src="{{ settings.benefit_image_4 | img_url:'original' }}">
+                </div>
+                <div class="Item__Content">
+                  <span class="Title">{{ settings.benefit_title_4 }}</span>
+                  <p class="Text">{{ settings.benefit_text_4 }}</p>
+                </div>
+              </div>
+            {% endif %}
+            {% if settings.benefit_title_5 != blank %}
+              <div class="Item" aria-hidden="false">
+                <div class="Item__Logo">
+                  <img src="{{ settings.benefit_image_5 | img_url:'original' }}">
+                </div>
+                <div class="Item__Content">
+                  <span class="Title">{{ settings.benefit_title_5 }}</span>
+                  <p class="Text">{{ settings.benefit_text_5 }}</p>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+    
+
+    {% if settings.checkout_testimonial_heading != blank %}
+      <div class="checkout-testimonial-main-container">
+        <div class="checkout-testimonial-main">
+          <div class="checkout-testimonial-heading">
+            <h2>{{ settings.checkout_testimonial_heading }}</h2>
+          </div>
+          {% if settings.checkout_testimonial_text_1 != blank %}
+            <div class="checkout-testimonial-box">
+              <div class="checkout-testimonial-img-box">
+                <img src="{{ settings.testimonial_star | img_url: 'master' }}">
+                <img src="{{ settings.testimonial_star | img_url: 'master' }}">
+                <img src="{{ settings.testimonial_star | img_url: 'master' }}">
+                <img src="{{ settings.testimonial_star | img_url: 'master' }}">
+                <img src="{{ settings.testimonial_star | img_url: 'master' }}">
+              </div>
+              <div class="checkout-testimonial-text-box">{{ settings.checkout_testimonial_text_1 }}</div>
+            </div>
+          {% endif %}
+          {% if settings.checkout_testimonial_text_2 != blank %}
+            <div class="checkout-testimonial-box">
+              <div class="checkout-testimonial-img-box">
+                <img src="{{ settings.testimonial_star | img_url: 'master' }}">
+                <img src="{{ settings.testimonial_star | img_url: 'master' }}">
+                <img src="{{ settings.testimonial_star | img_url: 'master' }}">
+                <img src="{{ settings.testimonial_star | img_url: 'master' }}">
+                <img src="{{ settings.testimonial_star | img_url: 'master' }}">
+              </div>
+              <div class="checkout-testimonial-text-box">{{ settings.checkout_testimonial_text_2 }}</div>
+            </div>
+          {% endif %}
+          {% if settings.checkout_testimonial_text_3 != blank %}
+            <div class="checkout-testimonial-box">
+              <div class="checkout-testimonial-img-box">
+                <img src="{{ settings.testimonial_star | img_url: 'master' }}">
+                <img src="{{ settings.testimonial_star | img_url: 'master' }}">
+                <img src="{{ settings.testimonial_star | img_url: 'master' }}">
+                <img src="{{ settings.testimonial_star | img_url: 'master' }}">
+                <img src="{{ settings.testimonial_star | img_url: 'master' }}">
+              </div>
+              <div class="checkout-testimonial-text-box">{{ settings.checkout_testimonial_text_3 }}</div>
+            </div>
+          {% endif %}
+          {% if settings.checkout_testimonial_text_4 != blank %}
+            <div class="checkout-testimonial-box">
+              <div class="checkout-testimonial-img-box">
+                <img src="{{ settings.testimonial_star | img_url: 'master' }}">
+                <img src="{{ settings.testimonial_star | img_url: 'master' }}">
+                <img src="{{ settings.testimonial_star | img_url: 'master' }}">
+                <img src="{{ settings.testimonial_star | img_url: 'master' }}">
+                <img src="{{ settings.testimonial_star | img_url: 'master' }}">
+              </div>
+              <div class="checkout-testimonial-text-box">{{ settings.checkout_testimonial_text_4 }}</div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+ {% if settings.free_product == true %}
+          <div style="display:none;">
+            <div class="CheckoutBenefits2">
+                  <div class="CheckoutBenefits2__Header">
+                    <span class="CheckoutBenefits2__Heading">{{ settings.free_heading }}</span>
+                  </div>
+                  <div class="CheckoutBenefits2__Wrapper">
+          
+                    {% if settings.free_title_1 != blank %}
+                  <div class="Item" aria-hidden="false">
+                    <div class="Item__Logo">
+                      <img src="{{ settings.free_image_1 | img_url:'original' }}">
+                    </div>
+                    <div class="Item__Content">
+                      <span class="Title">{{ settings.free_title_1 }}</span>
+                      <div class="double-price"><p class="Text">{{ settings.free_text_1 }}</p> <p class="Text-cross">{{ settings.free_text_cross_1 }}</p></div>
+                    </div>
+                      <!-- <form method="post" action="/cart/add">
+  <input type="hidden" name="id" value="42226645205237" />
+  <input min="1" type="number" id="quantity" name="quantity" value="1"/>
+  <input type="submit" value="Add to cart" class="btn" />
+</form> -->
+                   <div class="button-product-div"><a id="cart-btn-4" class="button-product-box"><p class="button-product-text">{{ settings.button_text }}</p></a></div>
+                  </div>
+                      {% endif %}
+                
+    
+                  </div>
+                </div>
+          </div>
+        {% endif %}
+  </body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script>
+                jQuery('#cart-btn-4').click(function(){    
+                            addItemToCart4( {{settings.variant_id}}, 1);    // paste your id product number
+                  });
+                
+                  function addItemToCart4(variant_id, qty) {
+                    data4 = {
+                      id: variant_id,
+                      quantity: qty
+                    }
+                    
+                    jQuery.ajax({
+                      type: 'POST',
+                      url: '/cart/add.js',
+                      data: data4,
+                      dataType: 'json',
+                      success: function() { 
+                        window.location.href = 'https://cedarplanters.com/checkout';
+                      }
+                  });
+                }
+              </script>
+<style>
+  .sidebar__content {
+    background: #f7f7f7;
+    padding: 36px;
+}
+  .wrap, .content{
+    background:#ffffff;
+  }
+  .product-thumbnail{
+    width: 5.6em;
+    height: 6.4em;
+  }
+  .product-thumbnail::after{
+    border-radius: 0px;
+  }
+  .product__description__name{
+    color: #2e3131;
+    font-size: .875rem;
+    font-weight: 700;
+  }
+  span.order-summary__emphasis.skeleton-while-loading{
+    color: #0e3739;
+    font-weight: 700;
+  }
+  .product__price .order-summary__small-text.compare-at-price{
+    color: #757575;
+    font-weight: 400;
+  }
+  .order-summary__section--product-list::after, .total-line__price::before, .total-line__name::before{
+    background-color:unset !important;
+  }
+  .total-line__price.payment-due{
+    padding-top:0 !important;
+  }
+  .order-summary__section--product-list+.order-summary__section~.order-summary__section{
+    border:unset;
+  }
+  #checkout_submit{
+    background-color: #fff;
+    border-color: #0e3739;
+    border-radius: 0;
+    color: #0e3739;
+/*     height: 55px; */
+    border-width: 2px;
+  }
+  #checkout_reduction_code{
+    height: 55px;
+    border-radius: 0;
+    border: 1px solid rgba(79,87,102,.15);
+  }
+  #checkout_submit span.btn__content{
+    font-size: 19px;
+  }
+  .anyflexbox .field__input-btn{
+    margin-left:0;
+  }
+  .total-line-table__tbody{
+    text-transform: uppercase;
+  }
+    tr.total-line{
+    border-top: 1px solid rgba(57,62,65,.25);
+    color: #393e41;
+  }
+  tr.total-line th{
+    padding: 15px 0px !important;
+    font-size: .75rem;
+    letter-spacing:1px;
+    font-weight: 700;
+    color: #000000;
+  }
+  tr.total-line td{
+    font-weight:700;
+    width: 200px;
+    color: #000000;
+  }
+  .order-summary__emphasis, tr.total-line.total-line--shipping td.total-line__price span{
+    font-weight:700;
+    color: #000000;
+  }
+  tr.total-line.total-line--shipping td.total-line__price{
+    white-space:unset;
+  }
+  @media screen and (max-width: 999px){
+    .sidebar__content {
+    padding: 8px;
+    margin: 0 -13px;
+}
+    span.wrap{
+      background: #fafafa;
+    }
+  }
+
+  .related_products-outer{display:none}
+  .related_products-outer.show-up{display:block}
+  .order-summary-toggle__total-recap dd ~ dd {
+    display: none;
+}
+ .order-summary-toggle__total-recap dd:last-child {
+    display: block;
+}
+  .product__price del.order-summary__small-text:not(.compare-at-price) {
+    display: none;
+}
+  @media screen and (max-width: 999px){
+    .order-summary.order-summary--is-collapsed +.visually-hidden+ .icon-symbols + .related_products-outer.show-up{display:none}
+    .order-summary.order-summary--is-expanded +.visually-hidden+ .icon-symbols + .related_products-outer.show-up{display:block}
+    [data-checkout-original-payment-due-target] {
+    font-size: 1rem;
+}
+  }
+  del.order-summary__small-text.skeleton-while-loading--sm.compare-at-price {padding-right: 5px;}
+        .related_products-outer{
+        margin-top: 25px;
+      }
+      /* width */
+.related_products-checkout::-webkit-scrollbar {
+  height: 10px;
+}
+
+
+/* Track */
+.related_products-checkout::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+.related_products-checkout::-webkit-scrollbar-thumb {
+  background: #111111; 
+  border-radius: 10px;
+}
+
+      .related_products-checkout{
+        padding-top: 16px;
+        display: flex;
+        width: 100%;
+        flex-wrap: nowrap;
+        overflow: auto;
+        padding-bottom: 8px;
+        margin-bottom: 10px;
+      }
+     
+      .checkout_realted-products{
+        width: calc(40% - 22px);
+        flex: 0 0 40%;
+        border: 1px solid #eee;
+        text-align: -webkit-center;
+        text-align: center;
+        margin-right: 10px;
+      }
+      .item-title_price{
+        padding: 12px;
+      }
+      .item-title_price .item_title{
+        padding-bottom: 8px;
+        font-size: 11px;
+        color: #000;
+        text-align: left;
+        font-weight: 600;
+        margin: 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 30px;
+      }
+      .item-title_price .compare-price{
+        padding-left: 6px;
+        color: #000;
+        text-decoration: line-through;
+      }
+      .checkout-atc{
+        padding-bottom: 10px;
+      }
+      .checkout_atc-product{
+        background: #111111;
+        color: #fff;
+        height: 30px;
+        width: 86%;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 6px;
+}
+      }
+      .related_item-title{
+        text-align: -webkit-center;
+        text-align: center;
+      }
+      .related_item-title span{
+        font-size: 26px;
+        color: #111111;
+        font-weight: 600;
+      }
+     
+      .order-summary__sections{
+        height: auto !important;
+      }
+      .item_price {
+        font-size: 12px;
+        text-align: left;
+        padding-top: 10px;
+      }
+      .item_price .regular-price {
+        font-weight: 600;
+        background-color: #111111;
+        color: #fff;
+        padding: 0 4px;
+     }
+  .order-summary__small-text.compare-at-price~.order-summary__small-text.compare-at-price {
+    display: none;
+}
+</style>
+{% style %}
+  .anyflexbox .content{
+    overflow: hidden;
+  }
+            .bc {
+      /*         margin: 15px 0 0; */
+              padding: 0px;
+              list-style-type: none;
+              width: 100%;
+              max-width: 800px;
+      /*         height: 60px; */
+              counter-reset: breadcrumb;
+              position: -webkit-sticky;
+              position: sticky;
+              top: 0;
+              background: transparent;
+              z-index: 9;
+      /*         padding-top: 10px;
+              padding-bottom: 10px; */
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: space-between;
+            }
+            .bc:before {
+             position: absolute;
+          top: 40%;
+          left: 11.5%;
+          content: '';
+          width: 80%;
+          height: 0px;
+          background-color: white;
+          border-radius: 10px;
+          border: 2px solid {{settings.bread_background}};
+      /*         background: {{ green }}; */
+            }
+             .bc2:before {
+             background: linear-gradient(90deg, {{settings.bread_background}} 50%, #ffffff 50%) !important;
+            }
+            .bc3:before {
+             background: linear-gradient(90deg, {{settings.bread_background}} 100%, #ffffff 0%) !important;
+            }
+            .li-main{
+              width: auto;
+            }
+            .li-main li{
+              width: 100% !important
+            }
+            .bc .bc_item {
+              float: left;
+      /*         padding-top: 50px; */
+              width: 11%;
+              text-align: center;
+              position: relative;
+              color: #000;
+              font-family: Roboto,sans-serif;
+              font-size: 10px;
+              font-style: normal;
+              font-weight: 500;
+              line-height: 12px;
+              display: flex;
+          align-items: center;
+          justify-content: center;
+            flex-wrap: wrap;
+          flex-direction: column;
+            background: #fff;
+            }
+               .bc .bc_item img{
+                 width: 90%;
+                 top: 0px;
+                 position: relative;
+               }
+  .button-product-div{
+    width: 20%;
+  }
+            .bc .bc_item:after {
+              counter-increment: breadcrumb;
+              content:counter(breadcrumb);
+              position: absolute;
+              top: calc(40% - 19px);
+              left: calc(40% - 14px);
+              width: 40px;
+              height: 40px;
+              font-weight: 600;
+              text-align: center;
+      /*         border: 3px solid {{settings.bread_background}}; */
+              border-radius: 50%;
+              line-height: 20px;
+              font-size: 16px;
+
+              align-items: center;
+              display: flex;
+              justify-content: center;
+              color: {{settings.bread_color}};
+            }
+            .bc .produkte-cart:after {
+              content: '' !important;
+              background-image: url(https://cdn.shopify.com/s/files/1/0499/9659/5366/files/french-knife.png?v=1665421140) !important;
+              background-size: 22px !important;
+              background-repeat: no-repeat !important;
+              background-position: 2px !important;
+              width: 30px !important;
+              height: 30px !important;
+              line-height: 30px !important;
+              left: calc(50% - 15px) !important;
+              top: -7px !important;
+            }
+         .bc .bc_current:after {
+
+              color:{{settings.bread_background_hover}};
+
+            }
+
+            .bc .bc_complete:after {
+
+              color:{{settings.bread_background_hover}};
+
+            }
+
+
+            .field__label.field__label--visible[for="checkout_shipping_address_phone"] {display:none !important;}
+            .floating-labels .field--show-floating-label .field__input[name="checkout[shipping_address][phone]"] {padding-top: 0.5em;}
+            .timer-checkout {
+              display: block;
+              background: #fefefe;
+              padding: 10px 20px;
+              border: 1px solid #000;
+              font-size: 14px;
+              color: #000;
+              font-weight: bold;
+              -webkit-border-radius: 5px;
+              -moz-border-radius: 5px;
+              border-radius: 5px;
+              margin: 5px 0px 20px 0px;
+              text-align: center;
+            }
+
+            .CheckoutBenefits {
+              padding: 10px 0;
+              position: relative;
+            }
+            .CheckoutBenefits__Header {
+                position: relative;
+                text-align: center;
+                z-index: 1;
+            }
+            .CheckoutBenefits2__Header {
+                position: relative;
+                text-align: center;
+                z-index: 1;
+            }
+
+            .double-price{
+              display: flex;
+              align-items: center;
+              padding-top: 5px;
+            }
+
+            .CheckoutBenefits__Heading {
+
+          color: {{settings.benefit_main_heading}};
+          text-align: center;
+          font-size: {{ settings.main_heading_font_size }}px;
+          font-weight:{{ settings.main_heading_font_weight }};
+      /*             background: #fafafa; */
+            }
+            .CheckoutBenefits2__Heading {
+          color: {{settings.free_main_heading}};
+          text-align: center;
+          font-size: {{ settings.main_heading_font_size }}px;
+          font-weight:{{ settings.main_heading_font_weight }};
+            }
+            .CheckoutBenefits2{
+              margin: 10px 0px;
+            }
+            .CheckoutBenefits__Wrapper {
+                grid-gap: 20px;
+                display: flex;
+                flex-direction: column;
+                gap: 0px;
+                margin-top: 20px;
+                width: 100%;
+            }
+            .CheckoutBenefits2__Wrapper {
+                grid-gap: 10px;
+                display: flex;
+                flex-direction: column;
+                gap: 0px;
+                margin-top: 10px;
+                width: 100%;
+                background-color: {{ settings.free_main_background }};
+            }
+             #cart-btn-4 img{
+              width:16px
+            }
+            .CheckoutBenefits .Item {
+                grid-gap: 8px;
+                display: flex;
+                gap: 10px;
+              align-items: center;
+              margin-top: 10px;
+            }
+             .CheckoutBenefits2 .Item {
+                grid-gap: 8px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+   
+            }
+            .CheckoutBenefits .Item[aria-hidden="true"] {
+                display: none;
+            }
+            .CheckoutBenefits .Item__Content,
+            .CheckoutBenefits .Item__Logo {
+                display: table-cell;
+                vertical-align: middle;
+            }
+            .CheckoutBenefits2 .Item__Content,
+            .CheckoutBenefits2 .Item__Logo {
+                display: table-cell;
+                vertical-align: middle;
+            }
+            .CheckoutBenefits2 .Item__Content {
+                width: 60%;
+            }
+            .CheckoutBenefits .Item__Logo {
+                font-size: 15px;
+                width: 15%;
+            }
+            .CheckoutBenefits2 .Item__Logo {
+                font-size: 15px;
+                width: 20%;
+            }
+            .CheckoutBenefits .Item__Content {
+                width: 85%;
+            }
+
+            .CheckoutBenefits .Item__Content .Title {
+                color: {{settings.benefit_headings}};
+               font-size: {{ settings.sub_heading_font_size }}px;
+                font-weight:{{ settings.sub_heading_font_weight }};
+            }
+            .CheckoutBenefits2 .Item__Content .Title {
+                color: {{settings.free_headings}};
+                font-size: {{ settings.sub_heading_font_size }}px;
+                font-weight:{{ settings.sub_heading_font_weight }};
+            }
+            .CheckoutBenefits .Item__Content .Text {
+                color: {{settings.benefit_para}};
+                font-size: {{ settings.para_font_size }}px;
+                font-weight:{{ settings.para_font_weight }};
+            }
+            .CheckoutBenefits2 .Item__Content .Text {
+                color: {{settings.free_para}};
+                font-size: {{ settings.sub_heading_font_size }}px;
+                font-weight:{{ settings.sub_heading_font_weight }};
+            }
+            .CheckoutBenefits2 .Item__Content .Text-cross {
+                color: {{settings.free_para2}};
+                font-size: 14px;
+                font-weight: 400;
+                text-decoration: line-through;
+              margin-left: 5px
+            }
+            .Item__Logo img{
+              width: 80%
+            }
+           #cart-btn-4 p{
+             cursor: pointer;
+             color: {{settings.text_color}};
+             background-color:{{settings.button_background}};
+             font-size:{{ settings.font_size_desktop }}px;
+             font-weight: {{ settings.font_weight_desktop }};
+             padding:{{ settings.padding_top_bottom_desktop }}px {{ settings.padding_right_left_desktop }}px;
+             text-align: center;
+             border-radius: 8px;
+           }
+          #cart-btn-4:hover p{
+             color: {{settings.text_color_hover}};
+             background-color:{{settings.button_background_hover}};
+           }
+          .sidebar::after {
+    height: 122%;
+}
+
+            @media screen and (max-width: 1000px) {
+                .sidebar:after {
+                    background-color: #fff;
+                    box-shadow: none;
+                }
+              .CheckoutBenefits2 .Item__Content .Title{
+                font-size:12px
+              }
+              .CheckoutBenefits2 .Item__Content .Text{
+                font-size:12px
+              }
+             .CheckoutBenefits2 .Item__Content .Text-cross{
+                font-size:12px
+              }
+              .CheckoutBenefits__Heading{
+                font-size: 16px
+              }
+              .CheckoutBenefits .Item__Content .Title{
+               font-size: 12px;
+               font-weight: 700;
+              }
+              .double-price{
+               padding-top: 0px
+              }
+              .CheckoutBenefits .Item__Content .Text{
+                font-size: 11px
+              }
+
+               #cart-btn-4 img {
+          width: 12px;
+      }
+
+      .bc .bc_item:after {
+        top: calc(40% - 19px);
+        left: calc(40% - 14px);
+        font-size: 16px;
+    }
+              .bc:before {
+        top: 38%;
+    }
+            }
+            .PaymentOption .section__text {
+                color: #545454;
+                font-weight: 400;
+                line-height: 1;
+            }
+
+            [data-sms-marketing-phone-wrapper="true"] {display:none !important;}
+
+            smc-bg.smc-animated.smc-fadeIn {
+              display: none !important;
+            }
+            .checkout-testimonial-img-box img{
+              width: {{ settings.star_image_width }}px;
+            }
+     @media screen and (max-width:500px) {
+              .bc .bc_item {font-size:8px;}
+              .iti__country-list {width: 300px;}
+              .bc .bc_item {
+                  width: 13%;
+              }
+       .bc .bc_item:after {
+      top: calc(40% - 20px);
+      left: calc(40% - 16px);
+      font-size: 14px;
+  }
+       .bc .bc_item img {
+    top: 0px;
+}
+       #cart-btn-4 p {
+   
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 10px;
+   
+}
+            }
+            .checkout-testimonial-heading{
+              padding: 10px 0px;
+              border-top: 1px solid {{ settings.testimonial_heading_color }}4a;
+              color: {{ settings.testimonial_heading_color }}
+            }
+            .checkout-testimonial-heading p{
+              font-size: {{ settings.testimonial_heading_font_size }}px;
+              text-align: center;
+            }
+            .checkout-testimonial-heading p strong{
+              font-size: {{ settings.testimonial_heading_font_size_bold }}px;
+              font-weight: 600;
+            }
+            .checkout-testimonial-box{
+              padding-top: 10px;
+            }
+            .checkout-testimonial-text-box p{
+              font-size: {{ settings.testimonial_text_font_size }}px;
+            }
+            .checkout-testimonial-text-box p strong{
+              font-size: {{ settings.testimonial_text_font_size_bold }}px;
+              font-weight: 600;
+            }
+      .bc .bc_item .bread-crumb-img-active{
+        display: none
+      }
+      .bc .bc_complete .bread-crumb-img-active{
+        display: block;
+      }
+      .bc .bc_complete .bread-crumb-img{
+        display: none;
+      }
+      .bc .bc_current .bread-crumb-img-active{
+        display: block;
+      }
+      .bc .bc_current .bread-crumb-img{
+        display: none;
+        }
+{% endstyle %}
+
+<script type="text/javascript">
+            jQuery(document).on('page:load page:change', function() {
+                $('.CheckoutBenefits').insertAfter('.order-summary__section--total-lines');
+                $('.checkout-testimonial-main-container').insertAfter('.CheckoutBenefits');
+                $('.CheckoutBenefits2').insertBefore('.order-summary__section--discount');
+
+            });
+            jQuery(document).on('page:load', function() {
+                $('[data-rebuy-id="26463"]').insertAfter('.order-summary__section--product-list');
+            });
+           $(document).ready(function(){
+       $('[data-rebuy-id="26463"]').insertAfter('.order-summary__section--product-list');
+    });
+
+    window.addEventListener("load", (event) => {
+     if($(window).width() < 999)
+        {
+           $('.CheckoutBenefits').insertAfter('.main__content');
+           $('.checkout-testimonial-main-container').insertAfter('.CheckoutBenefits');
+
+        } else {
+             $('.CheckoutBenefits').insertAfter('.order-summary__section--total-lines');
+           $('.checkout-testimonial-main-container').insertAfter('.CheckoutBenefits');
+        }
+  });
+
+  function countdown( elementName, minutes, seconds ) {
+            var element, endTime, hours, mins, msLeft, time;
+        
+            function twoDigits( n ) {
+                return (n <= 9 ? "0" + n : n);
+            }
+        
+            function updateTimer() {
+                var localEndTime = localStorage.getItem('endTime');
+                msLeft = localEndTime - (+new Date);
+                if ( msLeft < 1000 ) {
+                    element.innerHTML = "„Zeit ist abgelaufen!“";
+                } else {
+                    time = new Date( msLeft );
+                    hours = time.getUTCHours();
+                    mins = time.getUTCMinutes();
+                    element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
+                    setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
+                }
+            }
+        
+            element = document.getElementById( elementName );
+            
+            if (!localStorage.getItem('endTime') || (localStorage.getItem('endTime') && (localStorage.getItem('endTime') - (+new Date) < 0))) {
+              endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
+              localStorage.setItem('endTime', endTime);
+            } 
+            
+            updateTimer();
+          }
+        
+          countdown( "ten-countdown", 10, 0 );
+</script>

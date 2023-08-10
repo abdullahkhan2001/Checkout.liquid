@@ -1,0 +1,499 @@
+{
+    "name": "Custom Checkout",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Custom Timer"
+      },
+      {
+        "type": "checkbox",
+        "id": "ch_timer",
+        "label": "Enable",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "ch_timer_before",
+        "label": "Timer Before Text"
+      },
+      {
+        "type": "text",
+        "id": "timers",
+        "label": "Timer"
+      },
+      {
+        "type": "text",
+        "id": "ch_timer_after",
+        "label": "Timer After Text"
+      },
+      {
+        "type": "header",
+        "content": "Custom Upsell"
+      },
+      {
+        "type": "checkbox",
+        "id": "free_product",
+        "label": "Enable",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "free_heading",
+        "label": "UpSell Heading"
+      },
+      {
+        "type": "header",
+        "content": "Custom Upsell Product"
+      },
+      {
+        "type": "image_picker",
+        "id": "free_image_1",
+        "label": "Upsell Product Image"
+      },
+      {
+        "type": "text",
+        "id": "free_title_1",
+        "label": "Upsell Title"
+      },
+      {
+        "type": "text",
+        "id": "free_text_1",
+        "label": "Upsell Price"
+      },
+      {
+        "type": "text",
+        "id": "free_text_cross_1",
+        "label": "Upsell Cross Price"
+      },
+      {
+        "type": "text",
+        "id": "variant_id",
+        "label": "Upsell Variant Id"
+      },
+      {
+        "type": "color",
+        "id": "free_para2",
+        "label": "Upsell Cross Price Color",
+        "default": "#ff0000"
+      },
+      {
+        "type": "header",
+        "content": {
+          "en": "Button Settings"
+        }
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text",
+        "default": "JOIN NOW"
+      },
+      {
+        "type": "image_picker",
+        "id": "free_cart",
+        "label": "Cart Icon"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button Link"
+      },
+      {
+        "type": "color",
+        "id": "button_background",
+        "label": "Button Background Color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Button Text color",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "button_background_hover",
+        "label": "Button Background Color On Hover",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "text_color_hover",
+        "label": "Button Text color On Hover",
+        "default": "#fff"
+      },
+      {
+        "type": "range",
+        "id": "font_size_desktop",
+        "min": 8,
+        "max": 50,
+        "step": 1,
+        "unit": "px",
+        "label": "Button Font size Desktop",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "font_weight_desktop",
+        "min": 100,
+        "max": 900,
+        "step": 100,
+        "label": "Button Font Weight",
+        "default": 500
+      },
+      {
+        "type": "range",
+        "id": "padding_top_bottom_desktop",
+        "min": 0,
+        "max": 60,
+        "step": 1,
+        "unit": "px",
+        "label": "Button Top\/buttom Padding Desktop",
+        "default": 10
+      },
+      {
+        "type": "range",
+        "id": "padding_right_left_desktop",
+        "min": 0,
+        "max": 60,
+        "step": 1,
+        "unit": "px",
+        "label": "Button right\/left Padding Desktop",
+        "default": 30
+      },
+      {
+        "type": "header",
+        "content": "Custom Breadcrumb"
+      },
+      {
+        "type": "checkbox",
+        "id": "breadcrumb",
+        "label": "Enable",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Breadcrumb"
+      },
+      {
+        "type": "image_picker",
+        "id": "breadcrumb_img",
+        "label": "Checkout Breadcrumb Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "breadcrumb_img_active",
+        "label": "Checkout Breadcrumb Image Active"
+      },
+      {
+        "type": "color",
+        "id": "bread_background",
+        "label": "Breadcrumb Background",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "bread_background_hover",
+        "label": "Breadcrumb Background Selected",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "bread_color",
+        "label": "Breadcrumb text color",
+        "default": "#000000"
+      },
+      {
+        "type": "header",
+        "content": "Benefits"
+      },
+      {
+        "type": "checkbox",
+        "id": "benefits",
+        "label": "Enable",
+        "default": true
+      },
+      {
+        "type": "color",
+        "id": "benefit_main_heading",
+        "label": "Benefits Main Heading",
+        "default": "#fd4798"
+      },
+      {
+        "type": "color",
+        "id": "benefit_headings",
+        "label": "Benefits Block Heading",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "benefit_para",
+        "label": "Benefits Block Para",
+        "default": "#979797"
+      },
+      {
+        "type": "text",
+        "id": "benefit_heading",
+        "label": "Main Heading"
+      },
+      {
+        "type": "header",
+        "content": "Benefit - Block"
+      },
+      {
+        "type": "text",
+        "id": "benefit_title_1",
+        "label": "Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "benefit_image_1",
+        "label": "Image - 256x Square"
+      },
+      {
+        "type": "textarea",
+        "id": "benefit_text_1",
+        "label": "text"
+      },
+      {
+        "type": "header",
+        "content": "Benefit - Block"
+      },
+      {
+        "type": "text",
+        "id": "benefit_title_2",
+        "label": "Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "benefit_image_2",
+        "label": "Image - 256x Square"
+      },
+      {
+        "type": "textarea",
+        "id": "benefit_text_2",
+        "label": "text"
+      },
+      {
+        "type": "header",
+        "content": "Benefit - Block"
+      },
+      {
+        "type": "text",
+        "id": "benefit_title_3",
+        "label": "Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "benefit_image_3",
+        "label": "Image - 256x Square"
+      },
+      {
+        "type": "textarea",
+        "id": "benefit_text_3",
+        "label": "text"
+      },
+      {
+        "type": "header",
+        "content": "Benefit - Block"
+      },
+      {
+        "type": "text",
+        "id": "benefit_title_4",
+        "label": "Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "benefit_image_4",
+        "label": "Image - 256x Square"
+      },
+      {
+        "type": "textarea",
+        "id": "benefit_text_4",
+        "label": "text"
+      },
+      {
+        "type": "header",
+        "content": "Benefit - Block"
+      },
+      {
+        "type": "text",
+        "id": "benefit_title_5",
+        "label": "Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "benefit_image_5",
+        "label": "Image - 256x Square"
+      },
+      {
+        "type": "textarea",
+        "id": "benefit_text_5",
+        "label": "text"
+      },
+      {
+        "type": "header",
+        "content": {
+          "en": "Font Size And Font Weight Settings"
+        }
+      },
+      {
+        "type": "range",
+        "id": "main_heading_font_size",
+        "min": 5,
+        "max": 50,
+        "step": 1,
+        "unit": "px",
+        "label": "Main Heading Font size",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "sub_heading_font_size",
+        "min": 5,
+        "max": 50,
+        "step": 1,
+        "unit": "px",
+        "label": "Sub Heading Font size",
+        "default": 14
+      },
+      {
+        "type": "range",
+        "id": "para_font_size",
+        "min": 5,
+        "max": 50,
+        "step": 1,
+        "unit": "px",
+        "label": "Para Font size",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "main_heading_font_weight",
+        "min": 100,
+        "max": 900,
+        "step": 100,
+        "label": "Main Heading Font Weight",
+        "default": 400
+      },
+      {
+        "type": "range",
+        "id": "sub_heading_font_weight",
+        "min": 100,
+        "max": 900,
+        "step": 100,
+        "label": "Sub Heading Font Weight",
+        "default": 400
+      },
+      {
+        "type": "range",
+        "id": "para_font_Weight",
+        "min": 100,
+        "max": 900,
+        "step": 100,
+        "label": "Para Font Weight",
+        "default": 400
+      },
+      {
+        "type": "range",
+        "id": "line_width",
+        "min": 1,
+        "max": 50,
+        "step": 1,
+        "label": "main heading line width",
+        "default": 25
+      },
+      {
+        "type": "color",
+        "id": "line_color",
+        "label": "Line Color",
+        "default": "#000"
+      },
+      {
+        "type": "richtext",
+        "id": "checkout_testimonial_heading",
+        "label": "Checkout Testimonial Heading"
+      },
+      {
+        "type": "image_picker",
+        "id": "testimonial_star",
+        "label": "Checkout Testimonial Star"
+      },
+      {
+        "type": "richtext",
+        "id": "checkout_testimonial_text_1",
+        "label": "Checkout Testimonial Text 1"
+      },
+      {
+        "type": "richtext",
+        "id": "checkout_testimonial_text_2",
+        "label": "Checkout Testimonial Text 2"
+      },
+      {
+        "type": "richtext",
+        "id": "checkout_testimonial_text_3",
+        "label": "Checkout Testimonial Text 3"
+      },
+      {
+        "type": "richtext",
+        "id": "checkout_testimonial_text_4",
+        "label": "Checkout Testimonial Text 4"
+      },
+      {
+        "type": "range",
+        "id": "star_image_width",
+        "min": 5,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Star Image Width",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "testimonial_heading_font_size",
+        "min": 5,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Testimonial Heading Font Size",
+        "default": 14
+      },
+      {
+        "type": "range",
+        "id": "testimonial_heading_font_size_bold",
+        "min": 5,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Testimonial Heading Font Size Bold",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "testimonial_text_font_size",
+        "min": 5,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Testimonial Text Font Size",
+        "default": 14
+      },
+      {
+        "type": "range",
+        "id": "testimonial_text_font_size_bold",
+        "min": 5,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Testimonial Text Font Size Bold",
+        "default": 16
+      },
+      {
+        "type": "color",
+        "id": "testimonial_heading_color",
+        "label": "Testimonial Heading Color",
+        "default": "#000000"
+      }
+    ]
+  }
